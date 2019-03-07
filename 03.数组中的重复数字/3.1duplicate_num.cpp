@@ -9,7 +9,7 @@ public:
 	//        duplication: (Output) the duplicated number in the array number（任意一个重复的数）
 	// Return value:       true if the input is valid, and there are some duplications in the array number
 	//                     otherwise false
-	bool duplicate1(int numbers[], int length, int* duplication) {
+	bool duplicate(int numbers[], int length, int* duplication) {
 		if (numbers == nullptr) return false;
 
 		for (int j = 0; j < length; j++) {
@@ -38,15 +38,12 @@ public:
 	}
 	
 };
-int main() 
-{
-	
-	int a[] = { 2, 2, 2, 2, 2 };
-	Solution s;
-	vector<int> v;
-	s.duplicate2(a, 5, v);
-	for (vector<int>::iterator i = v.begin(); i != v.end(); i++) {
-		cout << *i << " ";
-	}
-	
-}
+//int main() 
+//{
+//	
+//	int a[] = { 2, 2, 2, 2, 2 };
+//	solution s;
+//	int* v;
+//	s.duplicate(a, 5, v);
+//	cout << v << endl;
+//}
