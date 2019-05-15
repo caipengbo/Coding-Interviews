@@ -1,3 +1,4 @@
+import problem.P18DeleteListNode;
 import util.ListNode;
 import util.ListUtil;
 
@@ -18,8 +19,8 @@ public class MainClass {
         while ((line = bufferedReader.readLine()) != null) {
             ListNode node = ListUtil.stringToListNode(line);
 
-
             ListUtil.prettyPrintLinkedList(node);
+            System.out.println("=========================");
         }
     }
 }
