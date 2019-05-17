@@ -52,19 +52,31 @@ public class P18DeleteListNode {
         }
     }
     // 删除排序链表重复节点(重复的节点不保留)
-    public static void deleteDuplicatedNode2(ListNode head) {
-        ListNode p = head;
-        ListNode q = head.next;
-        while (q != null) {
-            if (q.val > p.next.val) {
-                p.next = q;
-                p = q;
+    public static ListNode deleteDuplicatedNode2(ListNode pHead) {
+        if (pHead == null || pHead.next == null) return pHead;
+        ListNode pre = null;
+        ListNode current = pHead;
+        ListNode tail;
+        while (current != null) {
+            // 找到重复的开始位置
+            if (current.next != null && current.next.val == current.val) {
+                tail = current;
+                while (tail.next != null && tail.next.val == current.val) {
+                    tail = tail.next;
+                }
+                // 说明头部就是重复的
+                if (pre == null) {
+                    pHead = tail.next;
+                } else {
+                    pre.next = tail.next;
+                }
+                current = tail.next;
+            } else {
+                pre = current;
+                current = current.next;
             }
-            q = q.next;
         }
-        if (p.next != null) {
-            p.next = null;
-        }
+        return pHead;
     }
 
     public static void main(String[] args) throws IOException {
@@ -75,7 +87,7 @@ public class P18DeleteListNode {
             ListNode head = node;
             ListUtil.prettyPrintLinkedList(head);
 
-            P18DeleteListNode.deleteDuplicatedNode2(head);
+            head = P18DeleteListNode.deleteDuplicatedNode2(head);
 
             ListUtil.prettyPrintLinkedList(head);
             System.out.println("=========");
