@@ -16,10 +16,13 @@ public class P20NumericStrings {
         boolean ret = scanInteger(str);
         if (cur <  len && str[cur] == '.') {
             cur++;
+            // 必须是ret 在后面，因为如果 ret 为 True 的话就会导致scanUnsignedInteger不执行
+            // .1314  1314. 都符合条件
             ret = scanUnsignedInteger(str) || ret;
         }
         if (cur <  len && (str[cur] == 'e' || str[cur] == 'E') ) {
             cur++;
+            // E前面和后面必须都要有整数
             ret = ret && scanInteger(str);
         }
         return ret && (cur == len);
