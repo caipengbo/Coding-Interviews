@@ -45,10 +45,11 @@ public class P24ReverseList {
         ListNode q;
         while (cur != null) {
             q = cur.next;
+            // 找到尾节点
             if (q == null) {
-                // cur.next = p;
                 reversedHead = cur;
             }
+            // 每次拆一个
             cur.next = p;
             p = cur;
             cur = q;

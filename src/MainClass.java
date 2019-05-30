@@ -1,4 +1,6 @@
 import problem.P18DeleteListNode;
+import problem.P25MergeSortedLists;
+import util.Input;
 import util.ListNode;
 import util.ListUtil;
 
@@ -11,16 +13,17 @@ import java.io.*;
  */
 public class MainClass {
     public static void main(String[] args) throws IOException {
-        File file = new File("src/input.txt");
-        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file));
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        int count = 0;
         String line;
+        BufferedReader bufferedReader = Input.getBufferReader();
 
         while ((line = bufferedReader.readLine()) != null) {
-            ListNode node = ListUtil.stringToListNode(line);
+            count++;
+            System.out.println("==========Test" + count + "=========================");
+            ListNode head = ListUtil.stringToListNode(line);
 
-            ListUtil.prettyPrintLinkedList(node);
-            System.out.println("=========================");
+
+            ListUtil.prettyPrintLinkedList(head);
         }
     }
 }
