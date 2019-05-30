@@ -70,44 +70,29 @@ public class P25MergeSortedLists {
     }
     // 非递归版本
     public static ListNode merge2(ListNode list1, ListNode list2) {
-        ListNode mergedHead = null, mergedTail=null;
+        // 先在头部设置一个头部指针（为了简化下面的代码）
+        ListNode mergedHead = new ListNode(-1);
+        ListNode mergedTail = mergedHead;
 
         while (list1 != null && list2 != null) {
-            if (list1.val < list2.val) {
-                if (mergedTail == null) {
-                    mergedHead = list1;
-                    mergedTail = mergedHead;
-                } else {
-                    mergedTail.next = list1;
-                }
+            if (list1.val <= list2.val) {
+                mergedTail.next = list1;
+                list1 = list1.next;
             } else {
-                if (mergedTail == null) {
-                    mergedHead = list2;
-                    mergedTail = mergedHead;
-                } else {
-                    mergedTail.next = list2;
-                }
+                mergedTail.next = list2;
+                list2 = list2.next;
             }
-            list1 = list1.next;
-            list2 = list2.next;
             mergedTail = mergedTail.next;
         }
 
         if (list1 == null) {
-            if (mergedTail == null) {
-                mergedHead = list2;
-            } else {
-                mergedTail.next = list2;
-            }
+            mergedTail.next = list2;
         }
         if (list2 == null) {
-            if (mergedTail == null) {
-                mergedHead = list1;
-            } else {
-                mergedTail.next = list1;
-            }
+            mergedTail.next = list1;
         }
-
+        // 去除头部辅助指针
+        mergedHead = mergedHead.next;
         return mergedHead;
     }
 
