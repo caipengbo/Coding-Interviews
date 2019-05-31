@@ -32,7 +32,7 @@ public class TreeUtil {
         }
         return "[" + output.substring(0, output.length() - 2) + "]";
     }
-
+    // 按层赋值，空节点使用null 即可 [8,8,7,9,2,null,null,null,null,4,7]
     public static TreeNode stringToTreeNode(String input) {
         input = input.trim();
         input = input.substring(1, input.length() - 1);
