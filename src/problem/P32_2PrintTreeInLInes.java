@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * Title: 把二叉树打印成多行
+ * Title: 32.2 把二叉树打印成多行
  * Desc: 从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。
  * Created by Myth on 6/5/2019
  */
