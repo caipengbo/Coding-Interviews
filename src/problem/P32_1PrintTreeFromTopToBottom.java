@@ -12,7 +12,7 @@ import java.util.LinkedList;
  * Desc: 从上往下打印出二叉树的每个节点，同层节点从左至右打印。
  * Created by Myth on 6/4/2019
  */
-public class P32PrintTreeFromTopToBottom {
+public class P32_1PrintTreeFromTopToBottom {
     // 层次打印，搞一个队列, 然后前序遍历即可
     // 二叉树遍历算法的非递归写法
     public static ArrayList<Integer> printFromTopToBottom(TreeNode root) {
@@ -42,7 +42,7 @@ public class P32PrintTreeFromTopToBottom {
             System.out.println("==========Test" + count + "=========================");
             TreeNode head = TreeUtil.stringToTreeNode(line);
             TreeUtil.prettyPrintTree(head);
-            ArrayList a = P32PrintTreeFromTopToBottom.printFromTopToBottom(head);
+            ArrayList a = P32_1PrintTreeFromTopToBottom.printFromTopToBottom(head);
             System.out.println(a.toString());
 
         }
