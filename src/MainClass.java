@@ -1,8 +1,6 @@
 import problem.P18DeleteListNode;
 import problem.P25MergeSortedLists;
-import util.Input;
-import util.ListNode;
-import util.ListUtil;
+import util.*;
 
 import java.io.*;
 
@@ -19,11 +17,20 @@ public class MainClass {
 
         while ((line = bufferedReader.readLine()) != null) {
             count++;
-            System.out.println("==========Test" + count + "=========================");
+            System.out.println("==========Test List" + count + "=========================");
             ListNode head = ListUtil.stringToListNode(line);
 
 
             ListUtil.prettyPrintLinkedList(head);
+        }
+
+        while ((line = bufferedReader.readLine()) != null) {
+            count++;
+            System.out.println("==========Test Tree" + count + "=========================");
+            TreeNode root = TreeUtil.stringToTreeNode(line);
+
+
+            TreeUtil.prettyPrintTree(root);
         }
     }
 }
