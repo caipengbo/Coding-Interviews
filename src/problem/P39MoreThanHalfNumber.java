@@ -79,11 +79,35 @@ public class P39MoreThanHalfNumber {
         if (count > mid) return array[pivot];
         return 0;
     }
+    // 超过一半数目的数字说明这个数字比其他数字出现次数的和还要多
+    public int MoreThanHalfNum_Solution2(int [] array) {
+        int len = array.length;
+        if (len == 0) return 0;
+        int val = array[0], times = 0;
+        for (int i = 0; i < len; i++) {
+            if (array[i] == val) {
+                times++;
+            } else {
+                times--;
+            }
+            if (times == 0) {
+                val = array[i]; // 最后一次被赋值为 val 的数字肯定是占大多数的数字，times,就是大多数count与其他部分count的差
+                times = 1;
+            }
+        }
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            if (array[i] == val) count++;
+        }
+        if (count > (len>>1)) return val;
+        else return 0;
+    }
 
     public static void main(String[] args) {
         int[] arr = {1};
+        int[] arr2 = {1,2,3,2,2,2,5,4,2};
         P39MoreThanHalfNumber p39 = new P39MoreThanHalfNumber();
-        int res = p39.MoreThanHalfNum_Solution(arr);
+        int res = p39.MoreThanHalfNum_Solution2(arr2);
         System.out.println(res);
     }
 
