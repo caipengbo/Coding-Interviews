@@ -46,7 +46,6 @@ public class P43NumberOf1 {
             }
             //前移一位
             i = i * 10;
-            break;
         }
         return count;
     }
@@ -84,7 +83,7 @@ public class P43NumberOf1 {
     // Test case : 1~ 13 = 6   1 ~ 55 = 16
     public static void main(String[] args) {
         P43NumberOf1 p43 = new P43NumberOf1();
-        System.out.println(p43.solution(12345));
+        System.out.println(p43.solution(13));
     }
 
 }
