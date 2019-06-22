@@ -27,11 +27,12 @@ public class P45SortArrayForMinNumber {
             }
         });
         // System.out.println(stringArrayList.toString());
-        String ret = "";
+        // String ret = "";
+        StringBuilder ret = new StringBuilder();
         for (String str : stringArrayList) {
-            ret += str;
+            ret.append(str);
         }
-        return ret;
+        return ret.toString();
     }
 
     public static void main(String[] args) {
