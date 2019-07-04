@@ -24,7 +24,7 @@ public class P56_2NumberAppearingOnce {
             }
         }
         int ret = 0;
-        // 注意这种方法只适合 正数 哦 
+        // 注意这种方法只适合 正数 哦
         for (int i = 0; i < 32; i++) {
             if (bitSum[i] % 3 == 0) ret = ret * 2;
             else ret = 1 + ret * 2;
