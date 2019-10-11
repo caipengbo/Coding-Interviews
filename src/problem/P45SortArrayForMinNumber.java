@@ -20,12 +20,7 @@ public class P45SortArrayForMinNumber {
         for (int i = 0; i < numbers.length; i++) {
             stringArrayList.add(String.valueOf(numbers[i]));
         }
-        stringArrayList.sort(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return (o1+o2).compareTo(o2+o1);
-            }
-        });
+        stringArrayList.sort((o1, o2) -> (o1+o2).compareTo(o2+o1));
         // System.out.println(stringArrayList.toString());
         // String ret = "";
         StringBuilder ret = new StringBuilder();

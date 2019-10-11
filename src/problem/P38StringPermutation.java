@@ -1,8 +1,6 @@
 package problem;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Title: 38. 字符串的排列（重要）
@@ -30,13 +28,13 @@ public class P38StringPermutation {
      * 所以第一个数就不再用与第三个数交换了。再考虑bab，它的第二个数与第三个数交换可以解决bba。此时全排列生成完毕！
      */
     public ArrayList<String> Permutation(String str) {
-        List<String> resultList = new ArrayList<>();
+        ArrayList<String> resultList = new ArrayList<>();
         if(str.length() == 0)
-            return (ArrayList)resultList;
+            return resultList;
         //递归的初始值为（str数组，空的list，初始下标0）
         fun(str.toCharArray(),resultList,0);
         Collections.sort(resultList);
-        return (ArrayList)resultList;
+        return resultList;
     }
 
     private void fun(char[] ch, List<String> list, int i){
@@ -112,6 +110,12 @@ public class P38StringPermutation {
 
     //交换数组的两个下标的元素
     private void swap(char[] str, int i, int j) {
+        TreeSet<Integer> set = new TreeSet<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return 0;
+            }
+        });
         if (i != j) {
             char t = str[i];
             str[i] = str[j];

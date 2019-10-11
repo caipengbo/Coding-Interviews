@@ -44,19 +44,19 @@ public class P59_1_2MaxInQueue {
         return ret;
     }
     // 题目二： 求队列的最大值，实现 max  push_back  pop_front 函数（模仿上面题目的思路）
-    private Deque<Integer> dataDeque = new ArrayDeque<>();
+    private Queue<Integer> dataDeque = new LinkedList<>();
     private Deque<Integer> maxValueDeque = new ArrayDeque<>();
     public void pushBack(Integer num) {
         while (!maxValueDeque.isEmpty() && num > maxValueDeque.getLast()) {
             maxValueDeque.removeLast();
         }
-        dataDeque.addLast(num);
+        dataDeque.add(num);
         maxValueDeque.addLast(num);
     }
     public void popFront() throws Exception {
         if (dataDeque.isEmpty()) throw new Exception("队列为空");
-        if (dataDeque.getFirst().equals(maxValueDeque.getFirst())) maxValueDeque.removeFirst();
-        dataDeque.removeFirst();
+        if (dataDeque.peek().equals(maxValueDeque.getFirst())) maxValueDeque.removeFirst();
+        dataDeque.poll();
     }
     public Integer max() throws Exception {
         if (dataDeque.isEmpty()) throw new Exception("队列为空");

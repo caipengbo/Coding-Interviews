@@ -1,11 +1,13 @@
 package problem;
 
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.PriorityQueue;
 
 /**
- * Title: 第一个只出现一次的字符
+ * Title: 50.1 第一个只出现一次的字符
  * Desc: 在一个字符串(0<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,
  *  并返回它的位置, 如果没有则返回 -1（需要区分大小写）.
  * Created by Myth on 6/24/2019
@@ -50,6 +52,11 @@ public class P50_1FirstNotRepeatingChar {
 
     public static void main(String[] args) {
         P50_1FirstNotRepeatingChar p50 = new P50_1FirstNotRepeatingChar();
-
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return 0;
+            }
+        });
     }
 }

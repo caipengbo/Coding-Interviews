@@ -1,9 +1,6 @@
 package problem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Title: 40. 最小的K个数
@@ -62,12 +59,7 @@ public class P40KLeastNumber {
         ArrayList<Integer> result = new ArrayList<>();
         if (k <= 0 || len < k) return result;
 
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(k, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2.compareTo(o1);
-            }
-        });
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(k, (o1, o2) -> o2.compareTo(o1));
         for (int value : array) {
             if (maxHeap.size() < k) {
                 maxHeap.add(value);
@@ -83,11 +75,11 @@ public class P40KLeastNumber {
 
     public static void main(String[] args) {
         int[] arr = {2,1};
-        int[] arr2 = {1,2,3,4,5,6,7,8};
+        int[] arr2 = {8,2,3,6,5,1,7,9};
         P40KLeastNumber p40 = new P40KLeastNumber();
-        ArrayList<Integer> ret = p40.GetLeastNumbers_Solution2(arr2, 4);
-        System.out.println(ret.toString());
-
+        // ArrayList<Integer> ret = p40.GetLeastNumbers_Solution3(arr2, 2);
+        // System.out.println(ret.toString());
+        p40.useHeap();
     }
 
 }

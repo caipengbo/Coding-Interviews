@@ -1,5 +1,10 @@
 package problem;
 
+import util.ListNode;
+import util.ListUtil;
+
+import java.util.LinkedList;
+
 /**
  * Title: 35. 复杂链表的复制
  * Desc: 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），
@@ -81,8 +86,22 @@ public class P35CopyComplexList {
         }
         return newHead;
     }
+    // 更好的写法
+    public static ListNode split3(ListNode head) {
+        if (head == null) return null;
+        ListNode p = head, q = head.next;
+        ListNode evenHead = head.next;
+        while (p.next != null && p.next.next != null) {
+            p.next = p.next.next;
+            q.next = q.next.next;
+            p = p.next;
+            q = p.next;
+        }
+        p.next = null;  // 封尾操作(该题比较特殊，如果是单纯的将一个链表拆成一个，需要进行封尾)
+        return head;
+    }
 
-    public static void main(String[] args) {
+    private void debug() {
         RandomListNode node1 = new RandomListNode(1);
         RandomListNode node2 = new RandomListNode(2);
         RandomListNode node3 = new RandomListNode(3);
@@ -122,5 +141,9 @@ public class P35CopyComplexList {
             h3 = h3.next;
         }
         System.out.println();
+    }
+    public static void main(String[] args) {
+        ListNode root = ListUtil.stringToListNode("[1,2]");
+        ListUtil.prettyPrintLinkedList(P35CopyComplexList.split3(root));
     }
 }

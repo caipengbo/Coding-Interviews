@@ -13,14 +13,10 @@ import java.io.IOException;
 public class P26SubstructureInTree {
     // 1. 找相同的根节点  2. 判断是否结构相同
     public static boolean hasSubtree(TreeNode root1, TreeNode root2) {
-        if (root1 != null && root2 != null) {
-            boolean same = sameStructure(root1, root2);
-            if (!same) {
-                return hasSubtree(root1.left, root2) || hasSubtree(root1.right, root2);
-            }
-            return true;
-        }
-        return false;
+        if (root1 == null || root2 == null) return false;
+        boolean same = sameStructure(root1, root2);
+        if (same) return true;
+        return hasSubtree(root1.left, root2) || hasSubtree(root1.right, root2);
     }
     public static boolean sameStructure(TreeNode root1, TreeNode root2) {
         if (root2 == null) return true;

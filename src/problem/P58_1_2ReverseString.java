@@ -1,5 +1,7 @@
 package problem;
 
+import java.util.Collections;
+
 /**
  * Title: 58.1 翻转单词  58.2 左旋转字符串
  * Desc:
@@ -12,6 +14,7 @@ public class P58_1_2ReverseString {
     private void reverse(char[] sentence, int begin, int end) {
         if (end >= sentence.length) return;
         while (begin < end) {
+            // swap(sentence[begin], sentence[end])
             sentence[begin] = (char)(sentence[begin] ^ sentence[end]);
             sentence[end] = (char)(sentence[end] ^ sentence[begin]);
             sentence[begin] = (char)(sentence[end] ^ sentence[begin]);
@@ -67,5 +70,6 @@ public class P58_1_2ReverseString {
         P58_1_2ReverseString p58 = new P58_1_2ReverseString();
         System.out.println(p58.reverseWord("I am a student.  "));
         System.out.println(p58.LeftRotateString("abcdefg", 2));
+        String s = "abc";
     }
 }
