@@ -13,7 +13,7 @@ public class P40KLeastNumber {
     // 解法 1：继续使用 39题的 partition 思路, 位于 index = k 左边的是比 k 小的那些数
     public ArrayList<Integer> GetLeastNumbers_Solution(int [] array, int k) {
         int len = array.length;
-        ArrayList<Integer> ret = new ArrayList();
+        ArrayList<Integer> ret = new ArrayList<>();
         if (k <= 0 || len < k) return ret;
         int low = 0, high = len - 1;
         int pivot = partition(array, low, high);
@@ -79,7 +79,7 @@ public class P40KLeastNumber {
         P40KLeastNumber p40 = new P40KLeastNumber();
         // ArrayList<Integer> ret = p40.GetLeastNumbers_Solution3(arr2, 2);
         // System.out.println(ret.toString());
-        p40.useHeap();
+        // p40.useHeap();
     }
 
 }
