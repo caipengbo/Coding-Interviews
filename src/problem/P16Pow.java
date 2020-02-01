@@ -1,7 +1,7 @@
 package problem;
 
 /**
- * Title: 数值的整数次方
+ * Title: 数值的整数次方(快速幂算法)
  * Desc: 不使用库函数，求 double pow(int base, int exponent)  , 不用考虑大数情况
  * Created by Myth on 5/14/2019
  */
@@ -22,7 +22,7 @@ public class P16Pow {
         if (exponent == 1) return base;
         double result = powWithPositiveExp(base, exponent >> 1);
         result *= result;
-        if ((exponent & 1) == 1) result *= base;
+        if ((exponent & 1) == 1) result *= base;  // 奇数
         return result;
     }
 

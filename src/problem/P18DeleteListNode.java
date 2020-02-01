@@ -36,6 +36,14 @@ public class P18DeleteListNode {
         toBeDeleted.next = p.next;
         return head;
     }
+    // LeetCode237：https://leetcode-cn.com/problems/delete-node-in-a-linked-list/
+    // 删除中间节点
+    public void deleteNode(ListNode node) {
+        
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+
     // 2. 删除排序链表重复节点(重复的节点保留)
     public static void deleteDuplicatedNode(ListNode head) {
         ListNode p = head;

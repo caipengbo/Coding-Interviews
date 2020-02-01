@@ -46,6 +46,29 @@ public class P58_1_2ReverseString {
         }
         return String.valueOf(sentenceChars);
     }
+    // 
+    public String reverseWord2(String sentence) {
+        int len = sentence.length();
+        if (len == 0) return "";
+        char[] sentenceChars = sentence.toCharArray();
+        // 翻转整个句子
+        reverse(sentenceChars, 0, len-1);
+        int begin, end = 0;
+        while (end < len && sentenceChars[end] == ' ') end++;
+        begin = end;
+        while (end < len) {
+            if (sentenceChars[end] == ' ') {
+                reverse(sentenceChars, begin, end-1);
+                while (end < len && sentenceChars[end] == ' ') end++;
+                begin = end;
+            } else {
+                end++;
+            }
+        }
+        if (begin < len && end == len) reverse(sentenceChars, begin, end-1);
+        return String.valueOf(sentenceChars);
+    }
+
     // 题目二： 左旋转字符串
     // 对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。
     // 例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”
@@ -68,8 +91,8 @@ public class P58_1_2ReverseString {
 
     public static void main(String[] args) {
         P58_1_2ReverseString p58 = new P58_1_2ReverseString();
-        System.out.println(p58.reverseWord("I am a student.  "));
-        System.out.println(p58.LeftRotateString("abcdefg", 2));
-        String s = "abc";
+        System.out.println(p58.reverseWord2(" I am a  student.  "));
+        // System.out.println(p58.LeftRotateString("abcdefg", 2));
+        // String s = "abc";
     }
 }
