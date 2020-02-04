@@ -56,6 +56,33 @@ public class P19RegularExpressionsMatching {
 
         return false;
     }
+    // DP LeetCode 10
+    public boolean isMatch(String s, String p) {
+        int n = s.length(), m = p.length();
+        boolean[][] dp = new boolean[n+1][m+1];
+        dp[0][0] = true;
+        int i, j;
+        for (i = 0; i < m; i++) {
+            // i == 0 是不可能为 *
+            if (p.charAt(i) == '*' && dp[0][i-1]) {
+                dp[0][i+1] = true;
+            }
+        }
+        // 遍历两个串
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < m; j++) {
+                if (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.') dp[i+1][j+1] = dp[i][j];
+                else if (p.charAt(j) == '*') {
+                    if (p.charAt(j-1) != s.charAt(i) && p.charAt(j-1) != '.') {
+                        dp[i+1][j+1] = dp[i+1][j-1];
+                    } else {
+                        dp[i+1][j+1] = (dp[i+1][j] || dp[i][j+1] || dp[i+1][j-1]);
+                    }
+                }
+            }
+        }
+        return dp[n][m];
+    }
 
     public static void main(String[] args) {
         char[] str = new char[]{'a'};

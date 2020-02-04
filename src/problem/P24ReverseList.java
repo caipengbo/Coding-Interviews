@@ -56,6 +56,37 @@ public class P24ReverseList {
         }
         return reversedHead;
     }
+    //  迭代版本 
+    public ListNode reverseList1(ListNode head) {
+        if (head == null) return null;
+        ListNode before = null, cur = head, after = head.next;
+        while (cur != null) {
+            cur.next = before;
+            before = cur;
+            cur = after;
+            if (after != null) after = after.next;
+        }
+        return before;
+    }
+    public ListNode reverseList11(ListNode head) {
+        ListNode before = null, cur = head, after;
+        while (cur != null) {
+            after = cur.next;
+            cur.next = before;
+            before = cur;
+            cur = after;
+        }
+        return before;
+    }
+
+    // 递归写法
+    public ListNode reverseList2(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode ret = reverseList2(head.next);
+        head.next.next = head;
+        head.next = null;
+        return ret;
+    }
 
     public static void main(String[] args) throws IOException {
         String line;

@@ -7,10 +7,10 @@ package problem;
  * Created by Myth on 5/23/2019
  */
 public class P20NumericStrings {
-    // 字符串遵循模式 A[.[B]][e|EC], A 和 C 是有符号整数（可以有+ - 号）， B是无符号整数
+    // 字符串遵循模式 [A][.[B]][e|EC], A 和 C 是有符号整数（可以有+ - 号）， B是无符号整数
     public static int cur = 0;
 
-    public static boolean isNumeric(char[] str) {
+    public static boolean isNumericOld(char[] str) {
         int len = str.length;
         if (len == 0) return false;
         boolean ret = scanInteger(str);
@@ -42,6 +42,35 @@ public class P20NumericStrings {
             matchCount++;
         }
         return  (matchCount > 0);
+    }
+    // 自动机写法
+    private int op(char ch) {
+        if (ch == '+' || ch == '-') return 0;
+        if (ch >= '0' && ch <= '9') return 1;
+        if (ch == 'e' || ch == 'E') return 2;
+        if (ch == '.') return 3;
+        return -1;
+    }
+    public boolean isNumeric(char[] str) { 
+        // 8个状态, 5种操作  => 为了
+        int[][] automaton = {{1, 2, -1, 8},
+                            {-1, 2, -1, 8}, 
+                            {-1, 2, 5, 3},
+                            {-1, 4, 5, -1},
+                            {-1, 4, 5 , -1},
+                            {6, 7, -1, -1},
+                            {-1, 7, -1, -1},
+                            {-1, 7, -1, -1},
+                            {-1, 9, -1, -1},
+                            {-1, 9, 5, -1}};
+        int states = 0;
+        for (int i = 0; i < str.length; i++) {
+            int trans = op(str[i]);
+            if (trans == -1) return false;
+            states = automaton[states][trans];
+            if (states == -1) return false;
+        }
+        return (states == 2 || states == 3 || states == 4 || states == 7 || states == 9);
     }
 
     public static void main(String[] args) {

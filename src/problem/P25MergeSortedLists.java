@@ -13,6 +13,7 @@ import java.io.IOException;
  * Created by Myth on 5/30/2019
  */
 public class P25MergeSortedLists {
+    // ===============原始版本，比较繁琐，简洁版本见最后两个实现==================
     public static ListNode mergeError(ListNode list1, ListNode list2) {
         ListNode mergedList = null;
         mergedList = mergeToAList(mergedList, list1, list2);
@@ -95,11 +96,39 @@ public class P25MergeSortedLists {
         mergedHead = mergedHead.next;
         return mergedHead;
     }
+    // ======================================
+    // Review 1 递归版本
+    public ListNode mergeTwoListsReview1(ListNode list1, ListNode list2) {
+        if (list1 == null) return list2;
+        if (list2 == null) return list1;
+        ListNode head = null;
+        if (list1.val < list2.val) {
+            list1.next = mergeTwoListsReview1(list1.next, list2);
+            head = list1;
+        } else {
+            list2.next = mergeTwoListsReview1(list1, list2.next);
+            head = list2;
+        }
+        return head;
+    }
+    // review2 迭代版本
+    public ListNode mergeTwoListsReview2(ListNode list1, ListNode list2) {
+        ListNode dummy = new ListNode(-1);
+        ListNode p = dummy;
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                p.next = list1;
+                list1 = list1.next;
+            } else {
+                p.next = list2;
+                list2 = list2.next;
+            } 
+            p = p.next;
+        }
+        if (list1 != null) p.next = list1;
+        if (list2 != null) p.next = list2;
 
-
-    public static void test(ListNode list1, ListNode list2) {
-        list1 = list2;
-        list2 =list2.next;
+        return dummy.next;
     }
 
     public static void main(String[] args) throws IOException {
