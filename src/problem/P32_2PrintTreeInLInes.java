@@ -4,6 +4,7 @@ import util.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Title: 32.2 把二叉树打印成多行
@@ -44,5 +45,20 @@ public class P32_2PrintTreeInLInes {
 
         }
         return ret;
+    }
+
+    // 递归写法
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ret = new ArrayList<>();
+        recursive(ret, 0, root);
+        return ret;
+    }
+    private void recursive(List<List<Integer>> ret, int level, TreeNode root) {
+        if (root == null) return;
+        if (level >= ret.size()) ret.add(new LinkedList<Integer>());
+        List<Integer> line = ret.get(level);
+        line.add(root.val);
+        recursive(ret, level+1, root.left);
+        recursive(ret, level+1, root.right);
     }
 }

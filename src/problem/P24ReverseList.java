@@ -88,6 +88,37 @@ public class P24ReverseList {
         return ret;
     }
 
+    // LeetCode24： 两两交换链表中的节点
+    public ListNode swapPairs(ListNode head) {
+        // if (head == null) return null;
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode before = dummy, cur = head, after;
+        
+        while (cur != null) {
+            if (cur.next == null) {
+                before.next = cur;
+                before = cur;
+                break;
+            } else {
+                after = cur.next.next;
+                before.next = cur.next;
+                cur.next.next = cur;
+                before = cur;
+                cur = after;
+            }
+        }
+        before.next = null;
+        return dummy.next;
+    }
+    public ListNode swapPairsRecursive(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode node = swapPairsRecursive(head.next.next);
+        ListNode ret = head.next;
+        head.next.next = head;
+        head.next = node;
+        return ret;
+    }
     public static void main(String[] args) throws IOException {
         String line;
         BufferedReader bufferedReader = Input.getBufferReader();
