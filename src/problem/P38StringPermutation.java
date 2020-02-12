@@ -19,7 +19,8 @@ public class P38StringPermutation {
      * 递归的出口，就是只剩一个字符的时候，递归的循环过程，就是从每个子串的第二个字符开始依次与第一个字符交换，然后继续处理子串。
      *
      * 假如有重复值呢？
-     * *由于全排列就是从第一个数字起，每个数分别与它后面的数字交换，我们先尝试加个这样的判断——如果一个数与后面的数字相同那么这两个数就不交换了。
+     * *由于全排列就是从第一个数字起，每个数分别与它后面的数字交换，我们先尝试加个这样的判断——
+     * 如果一个数与后面的数字相同那么这两个数就不交换了。
      * 例如abb，第一个数与后面两个数交换得bab，bba。然后abb中第二个数和第三个数相同，就不用交换了。
      * 但是对 bab，第二个数和第三个数不 同，则需要交换，得到 bba。
      * 由于这里的bba和开始第一个数与第三个数交换的结果相同了，因此这个方法不行。
@@ -121,5 +122,39 @@ public class P38StringPermutation {
             str[i] = str[j];
             str[j] = t;
         }
+    }
+
+    // LeetCode
+    public String[] permutation(String s) {
+        LinkedList<String> ret = new LinkedList<>();
+        char[] ch = s.toCharArray();
+        backtracking(ch, 0, s.length(), ret);
+        return ret.toArray(new String[ret.size()]);
+    }
+    private void backtracking(char[] ch, int start, int end, LinkedList<String> ret) {
+        if (start == end) {
+            ret.add(new String(ch));
+            return;
+        }
+        char temp;
+        boolean[] used = new boolean[256];
+        for (int i = start; i < end; i++) {
+            // if(i > start && ch[i] == ch[start]) continue; 
+            if (used[ch[i]]) continue;
+            used[ch[i]] = true;
+            temp = ch[start];
+            ch[start] = ch[i];
+            ch[i] = temp;
+            backtracking(ch, start+1, end, ret);
+            temp = ch[start];
+            ch[start] = ch[i];
+            ch[i] = temp;
+        }
+    }
+    // 如果后面的元素有重复的，仅交换最后一个
+    public static void main(String[] args) {
+        P38StringPermutation p38 = new P38StringPermutation();
+        System.out.println(Arrays.toString(p38.permutation("abb")));
+
     }
 }
