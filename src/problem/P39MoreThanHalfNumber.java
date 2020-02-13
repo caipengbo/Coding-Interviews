@@ -103,11 +103,48 @@ public class P39MoreThanHalfNumber {
         else return 0;
     }
 
+    // 第二遍
+    // 1. 投票法
+    public int majorityElement21(int[] nums) {  // length >=1
+        int count = 0, cur = nums[0];
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == cur) count++;
+            else count--;
+            if (count <= 0) {
+                cur = nums[i];
+                count = 1;
+            }
+        }
+        return cur;
+    }
+    // 寻找partition下标==mid的元素（如有必要再判断一下）
+    public int majorityElement22(int[] nums) {
+        int n = nums.length, mid = (n >> 1);
+        int index = partition3(nums, 0, n-1);
+        while (index != mid) {
+            if (index > mid) index = partition3(nums, 0, index-1);
+            else index = partition3(nums, index+1, n-1);
+        }
+        return nums[index];
+    }
+    private int partition3(int[] nums, int start, int end) {
+        // if (start < 0 ) return -1;
+        int pivot = nums[start];
+        while (start < end) {
+            while (start < end && nums[end] >= pivot) end--;
+            nums[start] = nums[end];
+            while (start < end && nums[start] <= pivot) start++;
+            nums[end] = nums[start]; 
+        }
+        nums[start] = pivot;
+        return start;
+    }
+
     public static void main(String[] args) {
         int[] arr = {1};
         int[] arr2 = {1,2,3,2,2,2,5,4,2};
         P39MoreThanHalfNumber p39 = new P39MoreThanHalfNumber();
-        int res = p39.MoreThanHalfNum_Solution2(arr2);
+        int res = p39.majorityElement22(arr2);
         System.out.println(res);
     }
 

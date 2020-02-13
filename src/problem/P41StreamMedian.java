@@ -1,6 +1,7 @@
 package problem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -13,12 +14,7 @@ import java.util.PriorityQueue;
  */
 public class P41StreamMedian {
     private PriorityQueue<Integer> minHeap = new PriorityQueue();
-    private PriorityQueue<Integer> maxHeap = new PriorityQueue(new Comparator<Integer>() {
-        @Override
-        public int compare(Integer o1, Integer o2) {
-            return o2.compareTo(o1);
-        }
-    });
+    private PriorityQueue<Integer> maxHeap = new PriorityQueue(Collections.reverseOrder());
     private int count = 0;
 
     public void Insert(Integer num) {
