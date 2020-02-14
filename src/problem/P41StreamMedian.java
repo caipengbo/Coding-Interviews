@@ -51,6 +51,13 @@ public class P41StreamMedian {
         }
         count++;
     }
+
+    public void addNum(int num) {
+        maxHeap.add(num);
+        minHeap.add(maxHeap.poll());
+        if (minHeap.size() > maxHeap.size()) maxHeap.add(minHeap.poll());
+    }
+    
     // 注意数目不同时，中位数如何去求！！
     public Double GetMedian() {
         Double result;

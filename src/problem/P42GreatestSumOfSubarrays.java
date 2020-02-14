@@ -32,9 +32,16 @@ public class P42GreatestSumOfSubarrays {
         return maxSum;
     }
     // 解法2：TODO 动态规划解法
-    public int findGreatestSumOfSubArray2(int[] array) {
-        return 0;
+    public int maxSubArray(int[] nums) {
+        // array.length > 0;
+        int before = nums[0], max = before;
+        for (int i = 1; i < nums.length; i++) {
+            before = Math.max(nums[i], before+nums[i]);
+            max = Math.max(before, max);
+        }
+        return max;
     }
+    
 
     public static void main(String[] args) {
         P42GreatestSumOfSubarrays p42 = new P42GreatestSumOfSubarrays();
