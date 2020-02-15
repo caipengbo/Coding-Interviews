@@ -1,6 +1,9 @@
 package problem;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Title: 49. 丑数
@@ -24,4 +27,24 @@ public class P49UglyNumber {
         }
         return uglyArray.get(index-1);
     }
+
+    public long nthUglyNumber(int n) {
+        TreeSet<Long> set = new TreeSet<>();
+        set.add((long)1);
+        long first = 1;
+        for (int i = 1; i < n; i++) {
+            set.add(first*2);
+            if (first < Integer.MAX_VALUE/3) set.add(first*3);
+            if (first < Integer.MAX_VALUE/5) set.add(first*5);
+            first = set.pollFirst();
+        }
+        return set.pollFirst();
+    }
+    public static void main(String[] args) {
+        P49UglyNumber p49 = new P49UglyNumber();
+        System.out.println((2<<31)-1);
+        System.out.println(p49.nthUglyNumber(1407));
+        System.out.println(p49.nthUglyNumber(1600)); 
+    }
+
 }
