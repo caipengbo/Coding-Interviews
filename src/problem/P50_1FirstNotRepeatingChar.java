@@ -4,6 +4,7 @@ package problem;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
@@ -49,6 +50,17 @@ public class P50_1FirstNotRepeatingChar {
         return -1;
     }
 
+    public char firstUniqChar(String s) {
+        LinkedHashMap<Character, Integer> map = new LinkedHashMap<>(256);
+        for (int i = 0; i < s.length(); i++) {
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0)+1);
+        }
+        for (Character ch : map.keySet()) {
+            if (map.get(ch) == 1) return ch;
+        }
+
+        return ' ';
+    }
 
     public static void main(String[] args) {
         P50_1FirstNotRepeatingChar p50 = new P50_1FirstNotRepeatingChar();

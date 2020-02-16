@@ -52,10 +52,53 @@ public class P51InversePairs {
     public void test(int[] arr) {
         arr[0] = 100;
     }
+
+    // 第二遍
+    public int reversePairs(int[] nums) {
+        int n = nums.length;
+        return reversePairs(nums, 0, n-1);
+    }
+    public int reversePairs(int[] nums, int start, int end) {
+        if (start >= end) return 0;
+        int count = 0;
+        int m = (start + end) / 2;
+        int[] copyArr = new int[nums.length];
+        count += reversePairs(nums, start, m);
+        count += reversePairs(nums, m+1, end);
+        count += countPairs(nums, start, m, m+1, end, copyArr);
+        return count;
+    }
+    private int countPairs(int[] nums, int start1, int end1, int start2, int end2, int[] copyArr) {
+        if (start1 >= start2) return 0;
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            copyArr[i] = nums[i];
+        }        
+        int i = start1;
+        while (start1 <= end1 && start2 <= end2) {
+            if (copyArr[start1] > copyArr[start2]) {
+                count += end1 - start1 + 1;
+                nums[i++] = copyArr[start2++];
+            } else {
+                nums[i++] = copyArr[start1++];
+            }
+        }
+        while (start1 <= end1) nums[i++] = copyArr[start1++];
+        while (start2 <= end2) nums[i++] = copyArr[start2++];
+        return count;
+    }
+
+
     public static void main(String[] args) {
         int[] a = {1, 2, 3, 4, 5};
         P51InversePairs p51 = new P51InversePairs();
-        p51.test(a);
-        System.out.println(Arrays.toString(a));
+        int[] nums0 = {7,5,6,4};
+        int[] nums1 = {7,5,6};
+        int[] nums2 = {7,5};
+        int[] nums3 = {7};
+        System.out.println(p51.reversePairs(nums0));
+        System.out.println(p51.reversePairs(nums1));
+        System.out.println(p51.reversePairs(nums2));
+        System.out.println(p51.reversePairs(nums3));
     }
 }
