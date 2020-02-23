@@ -56,10 +56,33 @@ public class P53_1NumberOfK {
         return -2;
     }
 
+    // 第二遍Leetcode
+    public int search(int[] nums, int target) {
+        if (nums.length == 0) return 0;
+        int l = 0, r = nums.length-1, m;
+        while (l < r) {
+            m = l + (r - l >> 1);
+            if (target <= nums[m]) r = m;
+            else l = m + 1; 
+        }
+        if (nums[l] != target) return 0;
+        int first = l;
+        l = 0;
+        r = nums.length - 1;
+        while (l < r) {
+            m = l + (r - l >> 2);
+            if (target < nums[m]) r = m;
+            else l = m + 1; 
+        }
+        if (nums[l] > target) l = l - 1;
+        return l-first+1;
+    }
+
     public static void main(String[] args) {
         P53_1NumberOfK p53 = new P53_1NumberOfK();
         int[] arr = {1, 1, 2, 3, 3, 3, 4, 4, 5};
-        System.out.println(p53.GetNumberOfK(arr, 5));
+        // System.out.println(1+2>>1);
+        System.out.println(p53.search(arr, 5));
         // System.out.println((0+1)>>1);
     }
 }

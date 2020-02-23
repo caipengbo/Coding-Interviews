@@ -27,7 +27,16 @@ public class P53_2MissingNumber {
         }
         return left;
     }
-
+    // LeetCode第二遍
+    public int missingNumber(int[] nums) {
+        int l = 0, r = nums.length-1, m;
+        while (l < r) {
+            m = l + (r - l >> 1);
+            if (nums[m] > m) r = m;
+            else l = m + 1;
+        }
+        return nums[l] > l ? l : l+1;
+    }
 
     public static void main(String[] args) {
         P53_2MissingNumber p53 = new P53_2MissingNumber();
@@ -35,9 +44,9 @@ public class P53_2MissingNumber {
         int[] arr2 = {0, 1, 3, 4, 5};
         int[] arr3 = {0, 1, 2, 3, 4};
         int[] arr4 = {0};
-        System.out.println(p53.solution(arr1));
-        System.out.println(p53.solution(arr2));
-        System.out.println(p53.solution(arr3));
-        System.out.println(p53.solution(arr4));
+        System.out.println(p53.missingNumber(arr1));
+        System.out.println(p53.missingNumber(arr2));
+        System.out.println(p53.missingNumber(arr3));
+        System.out.println(p53.missingNumber(arr4));
     }
 }
