@@ -31,4 +31,18 @@ public class P57_1TwoNumbersWithSum {
         }
         return ret;
     }
+    public int[] twoSum(int[] nums, int target) {
+        int i = 0, j = nums.length-1;
+        int[] ret = new int[2];
+        while (i < j) {
+            if (nums[i] + nums[j] < target) i++;
+            else if (nums[i] + nums[j] > target) j--;
+            else {
+                ret[0] = nums[i];
+                ret[1] = nums[j];
+                break;
+            }
+        } 
+        return ret;
+    }
 }

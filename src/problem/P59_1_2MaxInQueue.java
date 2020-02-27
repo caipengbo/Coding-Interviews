@@ -63,6 +63,22 @@ public class P59_1_2MaxInQueue {
         return maxValueDeque.getFirst();
     }
 
+    // 第二遍
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (k <= 0 || k > nums.length) return new int[0];
+        Deque<Integer> deque = new LinkedList<>();
+        int n = nums.length;
+        int[] ret = new int[n-k+1];
+        for (int i = 0; i < n; i++) {
+            while (!deque.isEmpty() && i-deque.peek() >= k) deque.removeFirst();
+            while (!deque.isEmpty() && nums[i] > nums[deque.getLast()]) deque.removeLast();
+            deque.add(i);
+            if (i >= k-1) ret[i-k+1] = nums[deque.peek()];
+        }
+        return ret;
+    }
+    
+
     public static void main(String[] args) throws Exception {
         P59_1_2MaxInQueue p59 = new P59_1_2MaxInQueue();
         p59.pushBack(2);

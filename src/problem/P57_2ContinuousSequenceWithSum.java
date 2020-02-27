@@ -1,6 +1,9 @@
 package problem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Title: 57.2 和为 S 的连续正数序列  1 2 3 4 5 6
@@ -34,5 +37,33 @@ public class P57_2ContinuousSequenceWithSum {
             }
         }
         return ret;
+    }
+    // 正整数序列，至少含有两个数
+    public int[][] findContinuousSequence(int target) {
+        if (target < 3) return new int[0][];
+        int i = 1, j = 2;
+        int sum = 3;
+        List<int[]> seqs = new LinkedList<>();
+        while (j - i >= 1 && i + j <= target) {
+            if (sum > target) {
+                sum -= i++;
+            } else if (sum < target) {
+                sum += (++j);
+            } else {
+                int len = j-i+1;
+                int[] seq = new int[len];
+                for (int k = 0; k < len; k++) {
+                    seq[k] = i+k;
+                }
+                seqs.add(seq);
+                sum = sum - (i++) + (++j);
+            }
+        }
+        return seqs.toArray(new int[seqs.size()][]);
+    }
+
+    public static void main(String[] args) {
+        P57_2ContinuousSequenceWithSum p57 = new P57_2ContinuousSequenceWithSum();
+        System.out.println(Arrays.toString(p57.findContinuousSequence(15)));
     }
 }

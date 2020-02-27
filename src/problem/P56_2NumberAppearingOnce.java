@@ -32,6 +32,20 @@ public class P56_2NumberAppearingOnce {
         return ret;
     }
 
+    public int singleNumber(int[] nums) {
+        int ret = 0;
+        for (int i = 0; i < 32; i++) {
+            int count = 0;
+            for (int num : nums) {
+                // 注意此处，结果可不等于 1 
+                if ((num & (1 << i)) != 0) count++;
+                // if ((num & (1 << i)) == 1) count++;
+            }
+            if (count % 3 != 0) ret += (1 << i);
+        }
+        return ret; 
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 1, 1, 3, 3, 3, 4, 4, 4, -1};
         P56_2NumberAppearingOnce p56 = new P56_2NumberAppearingOnce();
