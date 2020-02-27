@@ -3,6 +3,8 @@ import problem.P25MergeSortedLists;
 import util.*;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Title:
@@ -19,7 +21,7 @@ public class MainClass {
             count++;
             System.out.println("==========Test List" + count + "=========================");
             ListNode head = ListUtil.stringToListNode(line);
-
+           
 
             ListUtil.prettyPrintLinkedList(head);
         }

@@ -77,7 +77,26 @@ public class P59_1_2MaxInQueue {
         }
         return ret;
     }
+
+    Queue<Integer> queue = new LinkedList<>();
+    Deque<Integer> deque = new LinkedList<>();  // 存储最大值
+    public int max_value() {
+        if (deque.isEmpty()) return -1;
+        return deque.peek();
+    }
     
+    public void push_back(int value) {
+        while (!deque.isEmpty() && value > deque.getLast()) deque.removeLast();
+        deque.add(value);
+        queue.add(value); 
+    }
+    
+    public int pop_front() {
+        if (queue.isEmpty()) return -1;
+        if (deque.peek().equals(queue.peek())) deque.removeFirst();
+        return queue.remove();
+    }
+
 
     public static void main(String[] args) throws Exception {
         P59_1_2MaxInQueue p59 = new P59_1_2MaxInQueue();
