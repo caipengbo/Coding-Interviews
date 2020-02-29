@@ -31,6 +31,36 @@ public class P61ContinuousCards {
         // System.out.println(oneCount);
         return notContinuous <= countsArray[0];
     }
+    // 第二遍：任意都可以
+    public boolean isStraight(int[] nums) {
+        if (nums == null || nums.length == 0) return false;
+        Arrays.sort(nums);
+        int n = nums.length, sum = 0, zero = 0;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] != 0) break;
+            zero++;
+        }
+        for (int i = zero; i < n-1; i++) {
+            if (nums[i+1] == nums[i]) return false;
+            sum += nums[i+1] - nums[i] - 1;
+        }
+        return zero >= sum;
+    }
+    // 修改
+    public boolean isStraight2(int[] nums) {
+        if (nums == null || nums.length == 0) return false;
+        Arrays.sort(nums);
+        int n = nums.length, zero = 0;
+        for (int i = zero; i < n-1; i++) {
+            if (nums[i] == 0) zero++;
+            else {
+                if (nums[i+1] == nums[i]) return false;
+                zero -= nums[i+1] - nums[i] - 1;
+            }
+        }
+        return zero >= 0;
+    }
+
 
     public static void main(String[] args) {
         P61ContinuousCards p61 = new P61ContinuousCards();
