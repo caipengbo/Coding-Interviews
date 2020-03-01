@@ -27,11 +27,8 @@ public class P62LastNumberInCircle {
         // 另外一种思路：将删除的元素置为-1，然后设置一个指针，如果该位置为-1，就跳过
         return circle.get(0);
     }
-    // TODO: 约瑟夫环的公式
-    public int Solution2(){
-        return -1;
-    }
-
+    
+    
     public static void main(String[] args) {
         P62LastNumberInCircle p62 = new P62LastNumberInCircle();
         System.out.println(p62.LastRemaining(5, 3));

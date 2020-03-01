@@ -21,6 +21,17 @@ public class P63MaxProfit {
         return profit;
     }
 
+    // 第二遍
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length <= 1) return 0;
+        int min = prices[0], profit = 0, n = prices.length;
+        for (int i = 0; i < n; i++) {
+            if (prices[i] - min > profit) profit = prices[i] - min;
+            if (prices[i] < min) min = prices[i]; 
+        }
+        return profit;
+    }
+
     public static void main(String[] args) {
         P63MaxProfit p63 = new P63MaxProfit();
         int[] arr1 = {9,11,8,5,7,12,16,14};

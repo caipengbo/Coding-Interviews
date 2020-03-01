@@ -39,6 +39,16 @@ public class P65AddTwoNumber {
         }
         return num1;
     }
+    // 第二遍
+    public int add(int a, int b) {
+        int xor;
+        while (a != 0) {
+            xor = a ^ b;
+            a = (a & b) << 1;
+            b = xor;
+        }
+        return b;
+    }
 
     public static void main(String[] args) {
         P65AddTwoNumber p65 = new P65AddTwoNumber();
