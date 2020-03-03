@@ -39,15 +39,33 @@ public class P66ConstructArray {
         int[] B = new int[len];
         if (len == 0) return B;
         B[0] = 1;
+        // 左半部分
         for (int i = 1; i < len; i++) {
             B[i] = B[i-1] * A[i-1];
         }
         int temp = 1;
+        // 右半部分
         for (int i = len-2; i >= 0; i--) {
             temp *= A[i+1];
             B[i] *= temp;
         }
         return B;
+    }
+    // 第二遍
+    public int[] constructArr(int[] a) {
+        if (a == null || a.length == 0) return a;
+        int n = a.length;
+        int[] b = new int[n];
+        b[0] = 1;
+        for (int i = 1; i < n; i++) {
+            b[i] = b[i-1] * a[i-1];
+        }
+        int temp = 1;
+        for (int i = n-2; i >= 0; i--) {
+            temp *= a[i+1];
+            b[i] *= temp;
+        }
+        return b;
     }
 
     public static void main(String[] args) {
