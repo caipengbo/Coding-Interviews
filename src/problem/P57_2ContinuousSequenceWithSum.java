@@ -61,6 +61,24 @@ public class P57_2ContinuousSequenceWithSum {
         }
         return seqs.toArray(new int[seqs.size()][]);
     }
+    // 第三遍：简洁版
+    public static int[][] findContinuousSequence3(int target) {
+        // 至少有两个元素
+        List<int[]> ret = new LinkedList<>();
+        int i = 1, j = 2;
+        target -= i+j;
+        while (i < j) {
+            if (target == 0) {
+                int[] arr = new int[j-i+1];
+                for (int k = i; k <= j; k++) arr[k-i] = k;
+                ret.add(arr);
+                target += i++;
+                target -= ++j;
+            } else if (target > 0) target -= ++j;
+            else target += i++;
+        }
+        return ret.toArray(new int[ret.size()][]);
+    }
 
     public static void main(String[] args) {
         P57_2ContinuousSequenceWithSum p57 = new P57_2ContinuousSequenceWithSum();
