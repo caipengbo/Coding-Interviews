@@ -27,7 +27,23 @@ public class P62LastNumberInCircle {
         // 另外一种思路：将删除的元素置为-1，然后设置一个指针，如果该位置为-1，就跳过
         return circle.get(0);
     }
-    
+    // 约瑟夫环的数学解法
+    // 假设 m 为 3   n = 5 
+    // 0 1 2 3 4
+    // 0 1 2 3 4 | 0 1 2 3 4  删除 2
+    // 3 4 0 1 | 3 4 0 1  删除 0
+    // 1 3 4 | 1 3 4 删除 4
+    // 1 3 | 1 3  删除1
+    // 3
+    // 可以看到最后位置0是我们最终剩的数字，那么这个数字在原始数组（第一步）中的位置就是 这个数字的值，倒着往前推
+    public int lastRemaining2(int n, int m) {
+        int ans = 0;
+
+        for (int i = 2; i <= n; i++) {
+            ans = (ans + m) % i;
+        }
+        return ans;
+    }
     
     public static void main(String[] args) {
         P62LastNumberInCircle p62 = new P62LastNumberInCircle();
