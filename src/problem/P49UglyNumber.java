@@ -2,6 +2,8 @@ package problem;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -12,6 +14,27 @@ import java.util.TreeSet;
  * Created by Myth on 6/23/2019
  */
 public class P49UglyNumber {
+    
+    public int nthUglyNumber3(int n) {
+        // 类似于归并，维护三个队列（*2队列，*3队列，*5队列）
+        // 每次求 min(q1,q2,q3),直到n
+        if (n <= 1) return n;
+        Queue<Integer> queue2 = new LinkedList<>();
+        Queue<Integer> queue3 = new LinkedList<>();
+        Queue<Integer> queue5 = new LinkedList<>();
+        int uglyNumber = 1;
+        for (int i = 1; i < n; i++) {
+            queue2.add(uglyNumber*2);
+            queue3.add(uglyNumber*3);
+            queue5.add(uglyNumber*5);
+            uglyNumber = Math.min(Math.min(queue2.peek(), queue3.peek()), queue5.peek());
+            if (uglyNumber == queue2.peek()) queue2.poll();
+            if (uglyNumber == queue3.peek()) queue3.poll();
+            if (uglyNumber == queue5.peek()) queue5.poll();
+        }
+        return uglyNumber;
+    }
+
     public int GetUglyNumber_Solution(int index) {
         if(index <= 0) return 0;
         ArrayList<Integer> uglyArray = new ArrayList<>();

@@ -14,6 +14,42 @@ public class P59_1_2MaxInQueue {
     // 他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个：
     // {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}，
     // {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。
+    
+     // 第二遍
+     public int[] maxSlidingWindow(int[] nums, int k) {
+        if (k <= 0 || k > nums.length) return new int[0];
+        Deque<Integer> deque = new LinkedList<>();
+        int n = nums.length;
+        int[] ret = new int[n-k+1];
+        for (int i = 0; i < n; i++) {
+            while (!deque.isEmpty() && i-deque.peek() >= k) deque.removeFirst();
+            while (!deque.isEmpty() && nums[i] > nums[deque.getLast()]) deque.removeLast();
+            deque.add(i);
+            if (i >= k-1) ret[i-k+1] = nums[deque.peek()];
+        }
+        return ret;
+    }
+
+    Queue<Integer> queue = new LinkedList<>();
+    Deque<Integer> deque = new LinkedList<>();  // 存储最大值
+    public int max_value() {
+        if (deque.isEmpty()) return -1;
+        return deque.peek();
+    }
+    
+    public void push_back(int value) {
+        while (!deque.isEmpty() && value > deque.getLast()) deque.removeLast();
+        deque.add(value);
+        queue.add(value); 
+    }
+    
+    public int pop_front() {
+        if (queue.isEmpty()) return -1;
+        if (deque.peek().equals(queue.peek())) deque.removeFirst();
+        return queue.remove();
+    }
+
+
     // 使用 队列
     public ArrayList<Integer> maxInWindows(int [] num, int size) {
         ArrayList<Integer> ret = new ArrayList<>();
@@ -61,40 +97,6 @@ public class P59_1_2MaxInQueue {
     public Integer max() throws Exception {
         if (dataDeque.isEmpty()) throw new Exception("队列为空");
         return maxValueDeque.getFirst();
-    }
-
-    // 第二遍
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        if (k <= 0 || k > nums.length) return new int[0];
-        Deque<Integer> deque = new LinkedList<>();
-        int n = nums.length;
-        int[] ret = new int[n-k+1];
-        for (int i = 0; i < n; i++) {
-            while (!deque.isEmpty() && i-deque.peek() >= k) deque.removeFirst();
-            while (!deque.isEmpty() && nums[i] > nums[deque.getLast()]) deque.removeLast();
-            deque.add(i);
-            if (i >= k-1) ret[i-k+1] = nums[deque.peek()];
-        }
-        return ret;
-    }
-
-    Queue<Integer> queue = new LinkedList<>();
-    Deque<Integer> deque = new LinkedList<>();  // 存储最大值
-    public int max_value() {
-        if (deque.isEmpty()) return -1;
-        return deque.peek();
-    }
-    
-    public void push_back(int value) {
-        while (!deque.isEmpty() && value > deque.getLast()) deque.removeLast();
-        deque.add(value);
-        queue.add(value); 
-    }
-    
-    public int pop_front() {
-        if (queue.isEmpty()) return -1;
-        if (deque.peek().equals(queue.peek())) deque.removeFirst();
-        return queue.remove();
     }
 
 

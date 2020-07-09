@@ -18,6 +18,7 @@ public class P36ConvertBinarySearchTree {
         convertNode(pRootOfTree);
         TreeNode head = pLastNodeInList;
         if (head == null) return null;
+        // 找到头
         while (head.left != null) {
             head = head.left;
         }

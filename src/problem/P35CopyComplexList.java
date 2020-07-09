@@ -21,6 +21,39 @@ class RandomListNode {
     }
 }
 public class P35CopyComplexList {
+
+    // 第二遍
+    // LeetCode138
+    public RandomListNode copyRandomList(RandomListNode head) {
+        RandomListNode p = head, q, newNode;
+        // copy
+        while (p != null) {
+            q = p.next;
+            newNode = new RandomListNode(p.label);
+            newNode.next = q;
+            p.next = newNode;
+            p = q;
+        }
+        // random指针赋值
+        p = head;
+        while (p != null) {
+            q = p.next;
+            if (p.random != null) q.random = p.random.next;
+            p = q.next;
+        }
+        // 拆分
+        p = head;
+        RandomListNode newHead = (head == null ? null : head.next);
+        while (p != null) {
+            q = p.next;
+            p.next = q.next;
+            if (q.next != null) q.next = q.next.next;
+            p = p.next;
+        }
+        return newHead;
+    }
+
+
     // 1. 为每个结点创建一个副本next指向副本 2. 副本的random指向源节点的random.next 3. 拆分成两个链表
     public static RandomListNode clone(RandomListNode pHead) {
         pHead = dup(pHead);
@@ -142,36 +175,7 @@ public class P35CopyComplexList {
         }
         System.out.println();
     }
-    // 第二遍
-    // LeetCode138
-    public RandomListNode copyRandomList(RandomListNode head) {
-        RandomListNode p = head, q, newNode;
-        // copy
-        while (p != null) {
-            q = p.next;
-            newNode = new RandomListNode(p.label);
-            newNode.next = q;
-            p.next = newNode;
-            p = q;
-        }
-        // random指针赋值
-        p = head;
-        while (p != null) {
-            q = p.next;
-            if (p.random != null) q.random = p.random.next;
-            p = q.next;
-        }
-        // 拆分
-        p = head;
-        RandomListNode newHead = (head == null ? null : head.next);
-        while (p != null) {
-            q = p.next;
-            p.next = q.next;
-            if (q.next != null) q.next = q.next.next;
-            p = p.next;
-        }
-        return newHead;
-    }
+    
 
     public static void main(String[] args) {
         ListNode root = ListUtil.stringToListNode("[1,2]");

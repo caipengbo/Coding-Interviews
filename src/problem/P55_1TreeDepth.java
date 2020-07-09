@@ -14,6 +14,6 @@ public class P55_1TreeDepth {
         if (root == null) return 0;
         int leftDepth = getTreeDepth(root.left);
         int rightDepth = getTreeDepth(root.right);
-        return (leftDepth > rightDepth ? leftDepth+1 : rightDepth+1);
+        return Math.max(leftDepth, rightDepth)+1;
     }
 }

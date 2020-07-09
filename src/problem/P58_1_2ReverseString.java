@@ -56,10 +56,11 @@ public class P58_1_2ReverseString {
         int begin, end = 0;
         while (end < len && sentenceChars[end] == ' ') end++;
         begin = end;
+        // 反转每个单词
         while (end < len) {
             if (sentenceChars[end] == ' ') {
                 reverse(sentenceChars, begin, end-1);
-                while (end < len && sentenceChars[end] == ' ') end++;
+                while (end < len && sentenceChars[end] == ' ') end++;  //  过滤掉多个空格
                 begin = end;
             } else {
                 end++;

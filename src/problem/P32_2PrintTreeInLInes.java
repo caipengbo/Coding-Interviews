@@ -5,6 +5,7 @@ import util.TreeNode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Title: 32.2 把二叉树打印成多行
@@ -12,6 +13,37 @@ import java.util.List;
  * Created by Myth on 6/5/2019
  */
 public class P32_2PrintTreeInLInes {
+     // 加个size
+     class Node {
+        public int val;
+        public List<Node> children;
+
+        public Node() {}
+
+        public Node(int _val,List<Node> _children) {
+            val = _val;
+            children = _children;
+        }
+    }
+     public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> ret = new ArrayList<>();
+        if (root == null) return ret;
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int nodeCount = queue.size();
+            List<Integer> level = new ArrayList<>(nodeCount);
+            for (int i = 0; i < nodeCount; i++) {
+                Node node = queue.poll();
+                level.add(node.val);
+                for(Node child : node.children) {
+                    if (child != null) queue.add(child);
+                }
+            }
+            ret.add(level);
+        }
+        return ret;
+    }
     // 和 32.1 题基本类似，主要不同点就是使用两个计数器
     public static ArrayList<ArrayList<Integer>> printInLines(TreeNode pRoot) {
         LinkedList<TreeNode> queue = new LinkedList<>();

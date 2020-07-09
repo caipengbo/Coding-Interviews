@@ -13,7 +13,7 @@ public class P55_2IsBalancedBinaryTree {
     public boolean isBalanced(TreeNode root) {
         return (getDepth(root) == -1);
     }
-
+    // 第二种方法，添加一个返回值，用来提前返回
     private int getDepth(TreeNode root) {
         if (root == null) return 0;
         int left = getDepth(root.left);

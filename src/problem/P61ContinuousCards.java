@@ -55,7 +55,7 @@ public class P61ContinuousCards {
             if (nums[i] == 0) zero++;
             else {
                 if (nums[i+1] == nums[i]) return false;
-                zero -= nums[i+1] - nums[i] - 1;
+                zero -= nums[i+1] - nums[i] - 1;  // 因为顺子的间隔是1，所以要减去1
             }
         }
         return zero >= 0;

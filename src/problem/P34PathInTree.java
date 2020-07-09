@@ -17,6 +17,19 @@ import java.util.List;
  * Created by Myth on 6/10/2019
  */
 public class P34PathInTree {
+    // 简洁代码
+    public void findPath(TreeNode root, int sum, LinkedList<Integer> path, List<List<Integer>> res) {
+        if (root == null) return;
+        path.add(root.val);
+        if (root.left == null && root.right == null) {
+            // 注意必须new一个新的list
+            if (root.val == sum) res.add(new LinkedList<>(path));
+        }
+        findPath(root.left, sum-root.val, path, res);
+        findPath(root.right, sum-root.val, path, res);
+        path.removeLast();
+    }
+
     // 非常典型的 DFS 深度优先遍历
     public static ArrayList<ArrayList<Integer>> findPath(TreeNode root, int target) {
         ArrayList<ArrayList<Integer>> paths = new ArrayList<>();

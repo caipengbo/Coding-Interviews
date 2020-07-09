@@ -10,6 +10,7 @@ public class P53_3InterIdenticalToInex {
     // 还是二分查找的思想
     // arr[i] > i, 那么：arr[i+k] > a[i]+k > i +k (arr中的元素全部都是整数)
     // 意味着 下标 i, arr[i] > i 那么其右边的值都大于其下标（对于元素为整数而言，不是整数不成立）
+    // 整数、整数、整数，重要的话说三遍
     public int find(int[] arr) {
         if (arr == null) return -1;
         int len = arr.length;

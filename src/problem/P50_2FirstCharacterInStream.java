@@ -29,6 +29,7 @@ public class P50_2FirstCharacterInStream {
         char ch = '#';
         int min = length + 1;
         int cur;
+        // 遍历，找到最小的位置
         for (Character c : hashMap.keySet()) {
             cur = hashMap.get(c);
             if (cur < min) {
